@@ -13,6 +13,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { HiOutlineSparkles } from "react-icons/hi";
 import TypewriterEffect from "@/components/genie/TypewriterEffect";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import {BiShare} from "react-icons/bi";
 
 export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieMessage, regenerateImage: (prompt: string) => void }) => {
     const { data: session } = useSession();
@@ -52,6 +53,19 @@ export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieM
     };
 
     const upscaleImage = () => {};
+
+    const shareImage = () => {
+        const data = {
+            files: [
+                new File([message.image!], 'image.jpeg', {
+                    type: message.image!.type,
+                }),
+            ],
+            title: 'Image',
+            text: 'image',
+        };
+        navigator.share(data)
+    }
 
     return (
         <div className="flex flex-col rounded-xl rounded-tl-none shadow-lg ml-[10px] transition-[300] bg-cyan-100 max-w-[100%] break-words py-2">
@@ -97,6 +111,13 @@ export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieM
                                 onClick={upscaleImage}
                             >
                                 <HiOutlineSparkles />
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                className="text-2xl"
+                                onClick={shareImage}
+                            >
+                                <BiShare />
                             </Button>
                         </div>
                     )}
