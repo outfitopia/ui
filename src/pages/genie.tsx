@@ -6,8 +6,12 @@ import {BsSend} from "react-icons/bs";
 import {GenieMessage, Message} from "@/typings/Message";
 import {ChatMessage} from "@/components/genie/ChatMessage";
 import axios from "axios";
+import {getSession} from "next-auth/react";
+import {doc, getDoc} from "firebase/firestore";
+import {db} from "@/serverless/firebase";
+import {User} from "@/typings/User";
 
-export default function Genie() {
+export default function Genie({user}: {user: User}) {
 
     const [message, setMessage] = useState("")
     const messageEndRef = useRef()
@@ -34,7 +38,8 @@ export default function Genie() {
         };
 
         let bodyContent = JSON.stringify({
-            chats: chats
+            chats: chats,
+            user: user
         });
 
         let response = await fetch("/api/generate", {
@@ -232,4 +237,35 @@ export default function Genie() {
             </div>
         </Layout>
     )
+}
+
+export async function getServerSideProps(context: any) {
+
+
+    const session = await getSession(context);
+
+    if (!session) {
+        return {
+            props: {},
+        };
+    }
+
+    const snapshot = await getDoc(
+        doc(db, "users", session!.user!.email!)
+    )
+    const user: User = {
+        name: session!.user!.name,
+        image: session!.user!.image
+    }
+
+    if(snapshot.get("age")) user.age = snapshot.get("age")
+    if(snapshot.get("location")) user.location = snapshot.get("location")
+    if(snapshot.get("outfitSize")) user.outfitSize = snapshot.get("outfitSize")
+    if(snapshot.get("gender")) user.gender = snapshot.get("gender")
+
+    return {
+        props: {
+            user
+        },
+    };
 }

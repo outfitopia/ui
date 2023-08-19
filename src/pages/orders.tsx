@@ -9,7 +9,7 @@ import { db } from "../serverless/firebase";
 import { Order } from "../typings/Order";
 import {GenieFab} from "@/components/common/GenieFab";
 
-function orders({orders}: {orders: Order[]}) {
+function Orders({orders}: {orders: Order[]}) {
     const {data: session} = useSession()
     return (
         <Layout>
@@ -55,7 +55,7 @@ function orders({orders}: {orders: Order[]}) {
     );
 }
 
-export default orders;
+export default Orders;
 
 export async function getServerSideProps(context: any) {
     const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
