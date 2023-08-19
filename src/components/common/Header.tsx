@@ -4,11 +4,12 @@ import { MdShoppingCart } from "react-icons/md";
 import { signIn, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { selectItems } from "../../redux/slices/basketSlice";
+import { BsChevronBarDown } from "react-icons/bs";
 function Header() {
     const cartItems = useSelector(selectItems);
     const { data: session } = useSession();
     return (
-        <div className="w-screen  py-2 px-6 flex justify-between items-center font-poppins">
+        <div className="w-screen py-2 px-6 flex justify-between items-center font-poppins">
             <div className="flex-[0.4] flex items-center justify-center py-2">
                 <Link href={"/"}>
                     <img
@@ -26,18 +27,29 @@ function Header() {
                 <li className="cursor-pointer hover:underline transition underline-offset-4">
                     <Link href={"/orders"}>Orders</Link>
                 </li>
-                <li className="cursor-pointer hover:underline transition underline-offset-4">
+                <li className="cursor-pointer hover:underline transition underline-offset-4 text-outfitopia-primary font-bold">
                     <Link href={"/closet"}>Closet</Link>
                 </li>
+                <li className="cursor-pointer hover:underline transition underline-offset-4 text-outfitopia-primary font-bold">
+                    <Link href={"/genie"}>Genie</Link>
+                </li>
+                <li className="cursor-pointer hover:underline transition underline-offset-4">
+                    <Link href={"/genie"}>Wishlist</Link>
+                </li>
+                <li className="cursor-pointer hover:underline transition underline-offset-4">
+                    <Link href={"/genie"}>Deals</Link>
+                </li>
             </ul>
-
 
             <ul className="flex-[0.3]  flex items-center justify-end space-x-12 py-2 px-12">
                 <li className="cursor-pointer hover:underline transition underline-offset-4">
                     {session ? (
-                        <Link
-                            href={"/account"}
-                        >{`Hello ${session.user?.name}`}</Link>
+                        <Link href={"/account"} className="text-sm">
+                            <p className="flex items-center">
+                                {`${session.user?.name}`}
+                                <BsChevronBarDown />
+                            </p>
+                        </Link>
                     ) : (
                         <p className="" onClick={() => signIn()}>
                             Sign In

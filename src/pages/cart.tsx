@@ -73,7 +73,7 @@ function cart() {
 
                                 <button
                                     disabled={!session}
-                                    className={`bg-orange-600 py-2 px-3 rounded-xl text-white font-bold mt-2 ${
+                                    className={`bg-outfitopia-primary py-2 px-3 rounded-xl text-white font-bold mt-2 ${
                                         !session &&
                                         "from-gray-300 to-gray-500 border-gray-200 cursor-not-allowed text-gray-200"
                                     }`}

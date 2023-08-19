@@ -14,7 +14,7 @@ export default function closet({items}: {items: ClosetItem[]}) {
                 <title>Closet | Outfitopia</title>
             </Head>
             <div className="w-[85%] mx-auto p-10">
-                <h1 className="text-3xl border-b mb-2 pb-1 border-orange-400">
+                <h1 className="text-3xl border-b mb-2 pb-1 border-outfitopia-primary">
                     Your Closet
                 </h1>
                 {

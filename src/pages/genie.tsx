@@ -117,7 +117,7 @@ export default function Genie() {
                 <title>Genie | Outfitopia</title>
             </Head>
             <div className="w-[85%] mx-auto p-10 flex-1 ">
-                <h1 className="text-3xl border-b mb-2 pb-1 border-orange-400 mt-[-60px]">
+                <h1 className="text-3xl border-b mb-2 pb-1 border-outfitopia-primary mt-[-60px]">
                     Create your own fashion outfits!
                 </h1>
                 <div className="w-[100%] h-[100%] flex flex-col">
@@ -132,7 +132,7 @@ export default function Genie() {
                     </div>
                     <div className="flex flex-row items-center mb-[-30px]">
                         <TextareaAutosize
-                            className="shadow-xl bg-amber-50 text-[20px] resize-none flex-1 outline-none rounded-lg px-3 py-2 border-2 border-[#FFFFEF]"
+                            className="shadow-xl bg-blue-50 text-[20px] resize-none flex-1 outline-none rounded-lg px-3 py-2 border-2 border-[#FFFFEF]"
                             value={message}
                             placeholder="What outfit would you like today?"
                             maxRows={6}

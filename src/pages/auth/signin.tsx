@@ -18,13 +18,13 @@ export default function Login({ providers, callbackUrl }: any) {
                 />
                 <div className="text-3xl">
                     <p className="inline"> Sign in to </p>
-                    <p className="font-bold text-orange-400 inline">Outfitopia</p>
+                    <p className="font-bold text-outfitopia-primary inline">Outfitopia</p>
                 </div>
             </div>
             <div className="p-5 flex flex-col space-y-5">
                 <div className="flex flex-col space-y-4">
                     <button
-                        className="bg-orange-400 font-semibold text-gray-900 text-base px-3 py-2 hover:bg-blue-500 focus:outline-none focus:ring-2 ring-blue-300 flex flex-row items-center justify-center rounded-lg"
+                        className="bg-outfitopia-primary font-semibold text-gray-900 text-base px-3 py-2 hover:bg-blue-500 focus:outline-none focus:ring-2 ring-blue-300 flex flex-row items-center justify-center rounded-lg"
                         onClick={() =>
                             signIn(providers.google.id, { callbackUrl })
                         }

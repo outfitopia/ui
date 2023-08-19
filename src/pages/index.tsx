@@ -6,6 +6,8 @@ import ProductsFeed from "../components/home/Products/ProductsFeed";
 import Layout from "../components/layout/Layout";
 import { Product } from "../typings/Product";
 import {GenieFab} from "@/components/common/GenieFab";
+import Categories from "@/components/home/Categories";
+import Trending from "@/components/home/Trending";
 
 const Home: NextPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
@@ -49,7 +51,9 @@ const Home: NextPage = () => {
             </Head>
 
             <main className="w-full">
+                <Categories />
                 <Banner />
+                <Trending />
                 <ProductsFeed products={products} />
             </main>
             <GenieFab />
