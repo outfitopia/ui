@@ -5,6 +5,7 @@ import {IconButton, TextareaAutosize} from "@mui/material";
 import {BsSend} from "react-icons/bs";
 import {GenieMessage, Message} from "@/typings/Message";
 import {ChatMessage} from "@/components/genie/ChatMessage";
+import axios from "axios";
 
 export default function Genie() {
 
@@ -50,6 +51,66 @@ export default function Genie() {
 
     const regenerateImage = (prompt: string) => {
         setPrompt(prompt + "     try this again")
+    }
+
+    const convertBlobToBase64URL = async (myBlob: Blob): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                const base64URL = event!.target!.result as string;
+                resolve(base64URL);
+            };
+
+            reader.onerror = function(error) {
+                reject(error);
+            };
+
+            reader.readAsDataURL(myBlob);
+        });
+    }
+
+    async function convertBase64URLToBlob(base64URL: string) {
+        const response = await fetch(base64URL);
+        return await response.blob();
+    }
+
+    const upscaleImage = async (source: GenieMessage) => {
+        try {
+            const dataUrl = await convertBlobToBase64URL(source.image!)
+            const body = {
+                data: [
+                    dataUrl,
+                    "v1.4",
+                    2.2
+                ]
+            }
+            const response = await axios({
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${process.env.NEXT_PUBLIC_HUGGING_AUTH}`,
+                    "Content-Type": "application/json"
+                },
+                data: body,
+                url: `${process.env.NEXT_PUBLIC_HUGGING_UPSCALE_URL}`
+            })
+
+            const upscaleUrl = response.data.data[0] as string
+            const blob = await convertBase64URLToBlob(upscaleUrl)
+            const newMessage: GenieMessage = {
+                message: source.message,
+                sender: "genie",
+                time: Date.now(),
+                image: blob,
+                imageUrl: URL.createObjectURL(blob),
+                loading: false,
+                regenerated: true
+            }
+            console.log(newMessage)
+            setChats([...chats, newMessage])
+        } catch (e) {
+            alert("Failed to upscale")
+        }
     }
 
     /**
@@ -134,7 +195,12 @@ export default function Genie() {
                     <div className="h-[100%] max-h-[64.7vh] flex overflow-y-auto flex-col transition-[200] py-[10px]">
                         {
                             chats.map(m => {
-                                return <ChatMessage message={m} key={m.time} regenerateImage={regenerateImage}/>
+                                return <ChatMessage
+                                    message={m}
+                                    key={m.time}
+                                    regenerateImage={regenerateImage}
+                                    upscale={upscaleImage}
+                                />
                             })
                         }
                         { /* @ts-ignore */}

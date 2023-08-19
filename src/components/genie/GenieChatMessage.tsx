@@ -15,7 +15,13 @@ import TypewriterEffect from "@/components/genie/TypewriterEffect";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {BiShare} from "react-icons/bi";
 
-export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieMessage, regenerateImage: (prompt: string) => void }) => {
+type GenieMessageProps = {
+    message: GenieMessage,
+    regenerateImage: (prompt: string) => void,
+    upscale: (source: GenieMessage) => Promise<void>
+}
+
+export const GenieChatMessage = ({ message, regenerateImage, upscale }: GenieMessageProps) => {
     const { data: session } = useSession();
     const [uploading, setUploading] = useState(false); // use this state as loading
 
@@ -52,7 +58,9 @@ export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieM
         regenerateImage(message.message)
     };
 
-    const upscaleImage = () => {};
+    const upscaleImage = () => {
+        upscale(message)
+    };
 
     const shareImage = () => {
         const data = {
