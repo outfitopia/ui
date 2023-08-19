@@ -14,6 +14,8 @@ import { HiOutlineSparkles } from "react-icons/hi";
 import TypewriterEffect from "@/components/genie/TypewriterEffect";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import {BiShare} from "react-icons/bi";
+import {useRouter} from "next/router";
+import Link from "next/link";
 
 type GenieMessageProps = {
     message: GenieMessage,
@@ -22,6 +24,7 @@ type GenieMessageProps = {
 }
 
 export const GenieChatMessage = ({ message, regenerateImage, upscale }: GenieMessageProps) => {
+    const router = useRouter()
     const { data: session } = useSession();
     const [uploading, setUploading] = useState(false); // use this state as loading
 
@@ -51,8 +54,6 @@ export const GenieChatMessage = ({ message, regenerateImage, upscale }: GenieMes
             setUploading(false);
         }
     };
-
-    const searchSimilarItems = () => {};
 
     const reloadImage = () => {
         regenerateImage(message.message)
@@ -100,12 +101,13 @@ export const GenieChatMessage = ({ message, regenerateImage, upscale }: GenieMes
                             >
                                 Add to closet
                             </Button>
-                            <Button
-                                variant="outlined"
-                                onClick={searchSimilarItems}
-                            >
-                                Search similar items
-                            </Button>
+                            <Link href={`/items/${Date.now()}`} target="_blank">
+                                <Button
+                                    variant="outlined"
+                                >
+                                    Search similar items
+                                </Button>
+                            </Link>
                             <Button
                                 variant="outlined"
                                 className="text-2xl"

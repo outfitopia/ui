@@ -1,0 +1,50 @@
+[
+	{
+		"title": "Traditional Plain Weave Satin Silk Saree",
+		"price": 349,
+		"category": "saree",
+		"image": "https://m.media-amazon.com/images/I/711kYqiEqrL._AC_UL600_FMwebp_QL65_.jpg",
+		"rating": 4,
+		"description": ""
+	},
+	{
+		"title": "Women's Kanchipuram Raw Silk Sareee",
+		"price": 243,
+		"category": "saree",
+		"image": "https://m.media-amazon.com/images/I/91ZagwCkpsL._AC_UL600_FMwebp_QL65_.jpg",
+		"rating": 4,
+		"description": ""
+	},
+	{
+		"title": "Women Heel Sandal",
+		"price": 34,
+		"category": "footwear",
+		"image": "https://m.media-amazon.com/images/I/71rFRf-qybL._AC_UL600_FMwebp_QL65_.jpg",
+		"rating": 4,
+		"description": ""
+	},
+	{
+		"title": "Women'S Satin Silk Ombre Shade Saree",
+		"price": 256,
+		"category": "saree",
+		"image": "https://m.media-amazon.com/images/I/51VWFurW6FL._AC_UL600_FMwebp_QL65_.jpg",
+		"rating": 4,
+		"description": ""
+	},
+	{
+		"title": "Peacock Gold Plated Necklace Set",
+		"price": 49,
+		"category": "accessory",
+		"image": "https://m.media-amazon.com/images/I/81uaCBR1dyL._AC_UL600_FMwebp_QL65_.jpg",
+		"rating": 4,
+		"description": ""
+	},
+	{
+		"title": "Womens Heels Heeled Sandal",
+		"price": 28,
+		"category": "footwear",
+		"image": "https://m.media-amazon.com/images/I/51HfMuLeTmL._AC_UL600_FMwebp_QL65_.jpg",
+		"rating": 4,
+		"description": ""
+	}
+]
