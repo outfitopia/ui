@@ -12,7 +12,7 @@ import loadingdot from "../../../public/assets/animations/loadingdot.json";
 import { AiOutlineReload } from "react-icons/ai";
 import { HiOutlineSparkles } from "react-icons/hi";
 
-export const GenieChatMessage = ({ message }: { message: GenieMessage }) => {
+export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieMessage, regenerateImage: (prompt: string) => void }) => {
     const { data: session } = useSession();
     const [uploading, setUploading] = useState(false); // use this state as loading
 
@@ -45,7 +45,9 @@ export const GenieChatMessage = ({ message }: { message: GenieMessage }) => {
 
     const searchSimilarItems = () => {};
 
-    const reloadImage = () => {};
+    const reloadImage = () => {
+        regenerateImage(message.message)
+    };
 
     const upscaleImage = () => {};
 

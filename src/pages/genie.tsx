@@ -52,6 +52,10 @@ export default function Genie() {
         return res.result
     }
 
+    const regenerateImage = (prompt: string) => {
+        setPrompt(prompt + "     regenerate this")
+    }
+
     /**
      *
      *  System -> how gpt should behave
@@ -124,7 +128,7 @@ export default function Genie() {
                     <div className="h-[100%] max-h-[64.7vh] flex overflow-y-auto flex-col transition-[200] py-[10px]">
                         {
                             chats.map(m => {
-                                return <ChatMessage message={m} key={m.time}/>
+                                return <ChatMessage message={m} key={m.time} regenerateImage={regenerateImage}/>
                             })
                         }
                         { /* @ts-ignore */}
