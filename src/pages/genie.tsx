@@ -5,10 +5,6 @@ import {IconButton, TextareaAutosize} from "@mui/material";
 import {BsSend} from "react-icons/bs";
 import {GenieMessage, Message} from "@/typings/Message";
 import {ChatMessage} from "@/components/genie/ChatMessage";
-import axios from "axios";
-import {getDownloadURL, ref, uploadBytes} from "@firebase/storage";
-import {storage} from "@/serverless/firebase";
-import {upload} from "@google-cloud/storage/build/src/resumable-upload";
 
 export default function Genie() {
 
@@ -88,6 +84,7 @@ export default function Genie() {
 
             const index = chats.indexOf(genie)
             genie.message = generatedPrompt
+            genie.loading = false
             chats[index] = {...genie, image: imageBlob, imageUrl: URL.createObjectURL(imageBlob)} as GenieMessage
             setChats(chats)
         } catch (e) {
@@ -113,7 +110,8 @@ export default function Genie() {
             const genieMessage: GenieMessage = {
                 message: prompt,
                 time: Date.now(),
-                sender: "genie"
+                sender: "genie",
+                loading: true
             }
             chats.push(genieMessage)
             setChats(chats)

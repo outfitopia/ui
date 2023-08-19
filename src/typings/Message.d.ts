@@ -6,5 +6,6 @@ export interface Message {
 
 export interface GenieMessage extends Message {
     image?: Blob,
-    imageUrl?: string
+    imageUrl?: string,
+    loading: boolean
 }
