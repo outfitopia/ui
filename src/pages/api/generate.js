@@ -1,13 +1,11 @@
 import { Configuration, OpenAIApi } from "openai";
-import {NextApiRequest, NextApiResponse} from "next";
-import {Message} from "@/typings/Message";
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function id(req: NextApiRequest, res: NextApiResponse) {
+export default async function id(req, res) {
     if (!configuration.apiKey) {
         res.status(500).json({
             error: {
@@ -30,7 +28,7 @@ export default async function id(req: NextApiRequest, res: NextApiResponse) {
         res.status(200).json({
             result: completion?.data?.choices[0]?.message?.content,
         });
-    } catch (error: any) {
+    } catch (error) {
         if (error.response) {
             console.error(error.response.status, error.response.data);
             res.status(error.response.status).json(error.response.data);
@@ -45,7 +43,7 @@ export default async function id(req: NextApiRequest, res: NextApiResponse) {
     }
 }
 
-const getMessages = (chats: Message[]) => {
+const getMessages = (chats) => {
     const messages = chats.map(m => {
         return {
             role: m.sender === "genie" ? "assistant" : "user",
@@ -56,7 +54,7 @@ const getMessages = (chats: Message[]) => {
         {
             role: "system",
             content:
-                "You are a fashion outfit designer. Your job is to provide details of outfits based on a user's demand and their details and you can also consider recent trends, season and festivals while deciding outfit details. User might ask changes in the outfits suggested by you. In your every response, you must provide the exact details of the outfit, which includes color, size and other important details for each type of cloth and accessory in the outfit, do not use any filler words and do not start describing which season, festival or age group the dress is for, just tell the outfit details and nothing else, preferably in comma seperated manner. Do not provide your responses like you are talking to person and suggesting them something, instead of your response should just tell the outfit details, there should be no conversational words or phrases in any of your responses. Whenever user asks for a modification, give them the comp[lete outfit details again instead of just suggesting the changes asked.",
+                "You are a fashion outfit designer. Your job is to provide details of outfits based on a user's demand and their details and you can also consider recent trends, season and festivals while deciding outfit details. User might ask changes in the outfits suggested by you. In your every response, you must provide the exact details of the outfit, which includes color, size and other important details for each type of cloth and accessory in the outfit, do not use any filler words and do not start describing who or what the dress is for, just tell the outfit details and nothing else, preferably in comma seperated manner. Do not phrase your responses like you are suggesting them something, instead your response should just tell the outfit details, there should be no conversational words or phrases in any of your responses. Whenever user asks for a modification, give them the complete outfit details again instead of just suggesting the changes asked. Do not ask user questions or suggestions, just directly suggest them an outfit based on the knowledge you have.",
         },
         { role: "user", content: `Hi fashion ai, some information about me includes... Tell me about the recent fashion trends` },
         {

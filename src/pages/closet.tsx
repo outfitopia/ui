@@ -20,7 +20,13 @@ export default function closet({items}: {items: ClosetItem[]}) {
                 {
                     items.map(item => {
                         return (
-                            <div></div>
+                            <div className="flex flex-row items-center p-[10px] my-[20px] rounded-lg mx-[10px] shadow-lg bg-neutral-200" key={item.details}>
+                                <img src={item.imageUrl} alt="Failed to laod image" />
+                                <div className="m-[20px]">
+                                    <h1 className="font-bold text-lg">Details</h1>
+                                    <div>{item.details}</div>
+                                </div>
+                            </div>
                         )
                     })
                 }
