@@ -53,7 +53,7 @@ export default function Genie() {
     }
 
     const regenerateImage = (prompt: string) => {
-        setPrompt(prompt + "     regenerate this")
+        setPrompt(prompt + "     try this again")
     }
 
     /**
@@ -65,7 +65,15 @@ export default function Genie() {
     const generateImage = async (genie: GenieMessage, prompt: string) => {
 
         try {
-            const generatedPrompt = await getPrompt(chats.slice(0, -1))
+            const contextChats = chats.slice(0, -1)
+            if(contextChats[contextChats.length - 1].sender === "genie") {
+                contextChats.push({
+                    message: "try this again",
+                    sender: "user",
+                    time: Date.now()
+                })
+            }
+            const generatedPrompt = await getPrompt(contextChats)
             console.log(generatedPrompt)
             const response = await fetch( `${process.env.NEXT_PUBLIC_HUGGING_URL}`,{
                 method: "POST",

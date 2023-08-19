@@ -11,6 +11,7 @@ import { useState } from "react";
 import loadingdot from "../../../public/assets/animations/loadingdot.json";
 import { AiOutlineReload } from "react-icons/ai";
 import { HiOutlineSparkles } from "react-icons/hi";
+import TypewriterEffect from "@/components/genie/TypewriterEffect";
 
 export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieMessage, regenerateImage: (prompt: string) => void }) => {
     const { data: session } = useSession();
@@ -55,6 +56,7 @@ export const GenieChatMessage = ({ message, regenerateImage }: { message: GenieM
         <div className="flex flex-col rounded-xl rounded-tl-none shadow-lg ml-[10px] transition-[300] bg-cyan-100 max-w-[100%] break-words py-2">
             {message.image ? (
                 <>
+                    <TypewriterEffect text={message.message} />
                     <img
                         className="p-[10px]"
                         src={message.imageUrl}
