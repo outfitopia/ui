@@ -9,7 +9,7 @@ function Header() {
     const cartItems = useSelector(selectItems);
     const { data: session } = useSession();
     return (
-        <div className="w-screen py-2 px-6 flex justify-between items-center font-poppins">
+        <div className="w-screen py-1 px-6 flex justify-between items-center font-poppins bg-white z-10 sticky top-0">
             <div className="flex-[0.4] flex items-center justify-center py-2">
                 <Link href={"/"}>
                     <img

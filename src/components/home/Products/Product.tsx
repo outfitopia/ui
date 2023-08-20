@@ -11,7 +11,7 @@ function Product({ product }: { product: Product }) {
         dispatch(addToBasket(product))
     };
     return (
-        <div className="relative flex flex-col m-2 bg-white z-30 p-2 border items-center">  
+        <div className="relative flex flex-col m-2 bg-white z p-2 border items-center">  
             <Image alt="" src={image} height={100} width={100} objectFit="contain" />
 
             <h4 className=" text-black truncate">{title}</h4>
