@@ -13,7 +13,7 @@ import axios from "axios";
 import {GenieFab} from "@/components/common/GenieFab";
 const stripePromise = loadStripe(process.env.stripe_public_key!);
 
-function cart() {
+function Cart() {
     const items = useSelector(selectItems);
     const { data: session } = useSession();
     const total = useSelector(selectTotal);
@@ -94,4 +94,4 @@ function cart() {
     );
 }
 
-export default cart;
+export default Cart;

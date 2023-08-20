@@ -29,7 +29,7 @@ const Home: NextPage = () => {
                         "id": product.code,
                         "title": product.name,
                         "category": product.code,
-                        description: "",
+                        description: "Clothes",
                         price: product.price.value,
                         image: product.images[0].baseUrl,
                         rating: 4
