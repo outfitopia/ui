@@ -20,7 +20,7 @@ function Banner() {
             </div>
 
             <div className="w-2/3 h-full object-contain bg-white">
-                <img src="/assets/images/banner5.png" alt="" className="h-full w-full object-contain" />
+                <img src="/assets/images/banner.png" alt="" className="h-full w-full object-contain" />
             </div>
         </div>
     );
