@@ -8,9 +8,10 @@ import {Button, TextField} from "@mui/material";
 import {User} from "@/typings/User";
 import {collection, doc, getDoc, getDocs, orderBy, query, setDoc} from "firebase/firestore";
 import {db} from "@/serverless/firebase";
+import { useRouter } from 'next/router';
 
 function Account({ user }: {user: User}) {
-
+    const router = useRouter();
     const {data: session} = useSession()
     const [isEditing, setIsEditing] = useState(false);
     const [editedUser, setEditedUser] = useState<User>(user);
@@ -43,6 +44,15 @@ function Account({ user }: {user: User}) {
         });
     };
 
+    const handleSignOut = async () => {
+        const serverSession = await getSession();
+
+        if (serverSession){
+            await signOut({ redirect: false, callbackUrl: '/' });
+            router.push('/');
+        }
+    };
+
     return (
         <Layout>
             <Head>
@@ -68,7 +78,7 @@ function Account({ user }: {user: User}) {
                                     onChange={handleInputChange}
                                 />
                             ) : (
-                                <div className="text-[23px]">{currentUser.age}</div>
+                                <div className="text-[23px]">{currentUser?.age}</div>
                             )
                         }
                     </div>
@@ -86,7 +96,7 @@ function Account({ user }: {user: User}) {
                                     onChange={handleInputChange}
                                 />
                             ) : (
-                                <div className="text-[23px]">{currentUser.gender}</div>
+                                <div className="text-[23px]">{currentUser?.gender}</div>
                             )
                         }
                     </div>
@@ -104,7 +114,7 @@ function Account({ user }: {user: User}) {
                                     onChange={handleInputChange}
                                 />
                             ) : (
-                                <div className="text-[23px]">{currentUser.outfitSize}</div>
+                                <div className="text-[23px]">{currentUser?.outfitSize}</div>
                             )
                         }
                     </div>
@@ -122,7 +132,7 @@ function Account({ user }: {user: User}) {
                                     onChange={handleInputChange}
                                 />
                             ) : (
-                                <div className="text-[23px]">{currentUser.location}</div>
+                                <div className="text-[23px]">{currentUser?.location}</div>
                             )
                         }
                     </div>
@@ -152,7 +162,7 @@ function Account({ user }: {user: User}) {
                         </Link>{" "}
                         page.
                     </p>
-                    <button className="cursor-pointer" onClick={() => signOut()}>
+                    <button className="cursor-pointer" onClick={handleSignOut}>
                         Sign Out
                     </button>
                 </div>

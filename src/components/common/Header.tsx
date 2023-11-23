@@ -4,58 +4,50 @@ import { MdShoppingCart } from "react-icons/md";
 import { signIn, useSession } from "next-auth/react";
 import { useSelector } from "react-redux";
 import { selectItems } from "../../redux/slices/basketSlice";
-import { BsChevronBarDown } from "react-icons/bs";
+import { useRouter } from 'next/router';
+
+interface Tab {
+    path: string;
+    label: string;
+}
+
+const tabs: Tab[] = [
+    { path: '/', label: 'Home' },
+    { path: '/genie', label: 'Store' },
+    { path: '/genie', label: 'Genie' },
+    { path: '/genie', label: 'About' },
+];
+
 function Header() {
     const cartItems = useSelector(selectItems);
     const { data: session } = useSession();
+    const router = useRouter();
+
+    const isTabActive = (pathname: string) => {
+        return router.pathname === pathname;
+    };
+
     return (
         <div className="w-screen py-1 px-6 flex justify-between items-center font-poppins bg-white z-10 sticky top-0">
-            <div className="flex-[0.4] flex items-center justify-center py-2">
+            <div className="flex-[0.4] flex justify-start py-2">
                 <Link href={"/"}>
                     <img
-                        src="/assets/images/Outfitopia.png"
+                        src="/assets/images/Outfitopia.svg"
                         alt="Outfitopia"
-                        className="h-28 object-contain cursor-pointer"
+                        className="h-24 object-contain cursor-pointer"
                     />
                 </Link>
             </div>
 
-            <ul className="flex-[0.3]  flex justify-start items-center space-x-12 py-2 px-12">
-                <li className="cursor-pointer hover:underline transition underline-offset-4">
-                    <Link href={"/"}>Home</Link>
-                </li>
-                <li className="cursor-pointer hover:underline transition underline-offset-4">
-                    <Link href={"/orders"}>Orders</Link>
-                </li>
-                <li className="cursor-pointer hover:underline transition underline-offset-4 text-outfitopia-primary font-bold">
-                    <Link href={"/closet"}>Closet</Link>
-                </li>
-                <li className="cursor-pointer hover:underline transition underline-offset-4 text-outfitopia-primary font-bold">
-                    <Link href={"/genie"}>Genie</Link>
-                </li>
-                <li className="cursor-pointer hover:underline transition underline-offset-4">
-                    <Link href={"/genie"}>Wishlist</Link>
-                </li>
-                <li className="cursor-pointer hover:underline transition underline-offset-4">
-                    <Link href={"/genie"}>Deals</Link>
-                </li>
+            <ul className="flex-[0.3] flex justify-start items-center space-x-6 py-2 px-12">
+                {tabs.map((tab: Tab) => {
+                    return <li key={tab.path} className={`cursor-pointer text-sm transition rounded-full px-4 py-1 ${isTabActive(tab.path) ? 'bg-gray-900 text-white' : ''}`}>
+                        <Link href={tab.path}>{tab.label}</Link>
+                    </li>
+                })}
             </ul>
 
-            <ul className="flex-[0.3]  flex items-center justify-end space-x-12 py-2 px-12">
-                <li className="cursor-pointer hover:underline transition underline-offset-4">
-                    {session ? (
-                        <Link href={"/account"} className="text-sm">
-                            <p className="flex items-center">
-                                {`${session.user?.name}`}
-                                <BsChevronBarDown />
-                            </p>
-                        </Link>
-                    ) : (
-                        <p className="" onClick={() => signIn()}>
-                            Sign In
-                        </p>
-                    )}
-                </li>
+            <ul className="flex-[0.3]  flex items-center justify-end space-x-6 py-2 px-12">
                 <li className="cursor-pointer text-3xl relative">
                     <Link href={"/cart"}>
                         <p>
@@ -65,6 +57,19 @@ function Header() {
                             <MdShoppingCart className="hover:text-outfitopia-primary" />
                         </p>
                     </Link>
+                </li>
+                <li className="cursor-pointer transition rounded-full px-4 py-1 bg-gray-900 text-white text-sm">
+                    {session ? (
+                        <Link href={"/account"}>
+                            <p className="flex items-center">
+                                {`${session.user?.name}`}
+                            </p>
+                        </Link>
+                    ) : (
+                        <p className="" onClick={() => signIn()}>
+                            LogIn
+                        </p>
+                    )}
                 </li>
             </ul>
         </div>

@@ -12,7 +12,7 @@ export default function Login({ providers, callbackUrl }: any) {
             </Head>
             <div className="flex flex-col items-center space-y-5">
                 <img
-                    src="/assets/images/outfitopia.png"
+                    src="/assets/images/Outfitopia.svg"
                     alt="microsoft logo"
                     className="w-32 h-32"
                 />
