@@ -1,11 +1,11 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import Banner from "../components/home/Banner";
-import ProductsFeed from "../components/home/Products/ProductsFeed";
+import Banner from "../components/store/Banner";
+import ProductsFeed from "../components/store/Products/ProductsFeed";
 import Layout from "../components/layout/Layout";
 import { Product } from "../typings/Product";
-import Categories from "@/components/home/Categories";
-import Trending from "@/components/home/Trending";
+import Categories from "@/components/store/Categories";
+import Trending from "@/components/store/Trending";
 
 function Store(){
     const [products, setProducts] = useState<Product[]>([]);

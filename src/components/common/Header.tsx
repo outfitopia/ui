@@ -58,7 +58,7 @@ function Header() {
                             <span className="absolute -top-2 -right-2 text-xs  bg-outfitopia-primary h-5 w-5 rounded-full flex items-center justify-center">
                                 {cartItems.length}
                             </span>
-                            <RiShoppingBag3Line className="hover:text-outfitopia-primary border p-2 border-black rounded-full"
+                            <RiShoppingBag3Line className="border p-2 border-black rounded-full"
                             size={35} />
                         </p>
                     </Link>

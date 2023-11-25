@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import React from "react";
 import { useSelector } from "react-redux";
-import CheckoutProduct from "../components/home/CheckoutProduct";
+import CheckoutProduct from "../components/store/CheckoutProduct";
 import Layout from "../components/layout/Layout";
 import { selectItems, selectTotal } from "../redux/slices/basketSlice";
 import { Product } from "../typings/Product";

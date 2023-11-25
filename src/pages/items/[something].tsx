@@ -3,7 +3,7 @@ import Head from "next/head";
 import React from "react";
 import items from "../../../public/data/items.json"
 import {Product} from "@/typings/Product";
-import ProductsFeed from "@/components/home/Products/ProductsFeed";
+import ProductsFeed from "@/components/store/Products/ProductsFeed";
 const Items = () => {
 
     const products = items.map(item => {
